@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cyber-cyan: #06b6d4;
+  --cyber-bg: #0a0f1a;
+  --panel-border: rgba(6, 182, 212, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--cyber-bg);
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+/* Cyber panel base */
+.cyber-panel {
+  @apply rounded-xl border backdrop-blur-xl transition-all duration-300;
+  background: rgba(10, 15, 26, 0.7);
+  border-color: rgba(6, 182, 212, 0.2);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.08);
+}
+
+.cyber-panel:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.12);
+}
+
+/* Input focus glow – consistent height */
+.cyber-input {
+  @apply w-full rounded-xl border bg-slate-900/80 px-4 py-3.5 min-h-[48px] text-white placeholder-slate-500 outline-none transition-all duration-300 text-base;
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+textarea.cyber-input {
+  min-height: 120px;
+}
+
+.cyber-input:focus {
+  border-color: var(--cyber-cyan);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+/* Button system – consistent sizes and touch targets (min 44px) */
+.cyber-btn {
+  @apply inline-flex items-center justify-center rounded-xl font-semibold text-base transition-all duration-300 min-h-[48px] px-6 py-3;
+  background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+.cyber-btn:hover:not(:disabled) {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+  transform: translateY(-1px);
+}
+
+.cyber-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-xl font-semibold text-base border-2 border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/10 min-h-[48px] px-6 py-3 transition-all duration-300;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center rounded-xl font-medium text-slate-300 hover:text-cyan-400 border border-slate-600 hover:border-cyan-500/50 min-h-[44px] px-5 py-2.5 transition-all duration-300;
+}
+
+.btn-sm {
+  @apply min-h-[40px] px-4 py-2 text-sm rounded-lg;
+}
+
+/* Page layout consistency */
+.page-section {
+  @apply py-10 md:py-14;
+}
+
+.page-heading {
+  @apply text-3xl md:text-4xl font-bold text-slate-200 mb-2;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.page-subheading {
+  @apply text-slate-500 mb-8 md:mb-10 text-base md:text-lg;
+}
+
+/* Animated grid background */
+.bg-cyber-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(rgba(6, 182, 212, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.04) 1px, transparent 1px);
+}
+
+/* Scan line overlay */
+.scan-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.6), transparent);
+  animation: scan-line 2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan-line {
+  0% { top: -2px; }
+  100% { top: 100%; }
+}
+
+/* Stagger children */
+.stagger-children > * {
+  animation: fade-in-up 0.5s ease-out backwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Risk meter animation */
+.risk-meter-fill {
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Table row hover and spacing */
+.cyber-table th {
+  @apply px-5 py-4;
+}
+
+.cyber-table td {
+  @apply px-5 py-4;
+}
+
+.cyber-table tbody tr {
+  @apply transition-colors duration-200;
+}
+
+.cyber-table tbody tr:hover {
+  background: rgba(6, 182, 212, 0.06);
+}
+
+/* Quantum simulation section accent */
+.quantum-glow {
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.15), 0 0 80px rgba(139, 92, 246, 0.08);
+}
+
+@keyframes qubit-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.animate-qubit-pulse {
+  animation: qubit-pulse 3s ease-in-out infinite;
+}
